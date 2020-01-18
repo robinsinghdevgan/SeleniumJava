@@ -23,8 +23,9 @@ public class FlipkartTest {
 	@BeforeTest
 	public void setup() throws IOException {
 		WebDriver driver = BrowserSetup.setup();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().deleteAllCookies();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(35, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 	}
 	
@@ -60,7 +61,7 @@ public class FlipkartTest {
 		Thread.sleep(200);
 		List<WebElement> options = thePriceSectionMaxDropDown.findElements(By.xpath("//option"));
 		
-		int selectThisOption = options.size() - 2;
+		int selectThisOption = options.size() - 3;
 		System.out.println(selectThisOption);
 		options.get(selectThisOption).click();
 		
@@ -72,6 +73,7 @@ public class FlipkartTest {
 		Thread.sleep(5000);
 		//get first element listed
 		driver.findElement(By.xpath("(//*[contains(text(),'% off')])[1]")).click();
+		//(//span[contains(text(),'Sort')]/parent::*)//div[contains(text(), 'Dis')]
 		
 		Thread.sleep(5000);
 		//switch context to new window opened
