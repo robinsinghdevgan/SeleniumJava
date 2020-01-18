@@ -19,6 +19,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.robinsinghdevgan.pageobjects.PageObjects;
+import com.robinsinghdevgan.setup.ArtifactLocations;
 import com.robinsinghdevgan.setup.InitialSetup;
 import com.robinsinghdevgan.setup.SpreadsheetReader;
 
@@ -33,7 +34,7 @@ public class NewTest {
 		SpreadsheetReader reader = null;
 		ArrayList<Object[]> testData = new ArrayList<Object[]>();
 
-		reader = new SpreadsheetReader(InitialSetup.dataSheetLocation);
+		reader = new SpreadsheetReader(ArtifactLocations.getSpreadsheetFilePath("data.xlsx"));
 
 		// for (int rowNum = 2; rowNum <= reader.getRowCount("search"); rowNum++) {
 		for (int rowNum = 2; rowNum <= 2; rowNum++) {

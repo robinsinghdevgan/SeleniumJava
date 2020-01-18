@@ -5,7 +5,7 @@
     <classes>
       <class name="com.robinsinghdev.app.NewTest">
         <methods>
-          <include name="f" invocation-numbers="0"/>
+          <include name="f"/>
           <include name="setup"/>
           <include name="close"/>
         </methods>
