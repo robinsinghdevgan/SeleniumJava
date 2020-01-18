@@ -1,0 +1,22 @@
+import java.awt.AWTException;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+var exe = "C:\\Users\\robin\\Downloads\\chromedriver_win32\\chromedriver.exe"
+System.setProperty("webdriver.chrome.driver", exe);
+
+var driver = new ChromeDriver();
+
+WebElement x(String XP){return driver.findElement(By.xpath(XP));}
+driver.get("https://flipkart.com/");

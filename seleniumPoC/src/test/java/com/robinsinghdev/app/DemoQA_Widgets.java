@@ -5,10 +5,8 @@ import static org.testng.Assert.fail;
 
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
-import java.lang.reflect.Method;
-import java.util.Date;
-import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -19,16 +17,10 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.ITestContext;
-import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.testng.internal.TestNGMethod;
 
 
 public class DemoQA_Widgets {
@@ -94,11 +86,6 @@ public class DemoQA_Widgets {
 
 	@Test(priority = 1, enabled = false, testName = "TC02_Tooltip", description = "hey")
 	public void testTooltip() throws Throwable {
-		String testName, testDesc, docFileWithPath;
-		testName = "TC02_Tooltip";
-		testDesc = "Validate the Tooltip page";
-		docFileWithPath = "C:\\Users\\rdevgan\\Pictures\\"+  new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()) + ".docx";
-		
 		driver.get("https://demoqa.com/");
 		driver.findElement(By.linkText("Tooltip")).click();
 		WebElement element = driver.findElement(By.xpath(".//*[@id='age']"));

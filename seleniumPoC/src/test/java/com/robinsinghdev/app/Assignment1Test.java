@@ -3,23 +3,22 @@ package com.robinsinghdev.app;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
-import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
+
+import com.robinsinghdevgan.setup.InitialSetup;
 
 public class Assignment1Test {
 	@Test
 	public void f() throws IOException {
 		
-		WebDriver driver = BrowserSetup.setup();
+		WebDriver driver = InitialSetup.setup();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
 		

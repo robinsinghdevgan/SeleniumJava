@@ -1,28 +1,26 @@
 package com.robinsinghdev.app;
 
-import com.robinsinghdevgan.pageobjects.*;
-
-import org.testng.annotations.Test;
-import org.testng.annotations.DataProvider;
-
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import com.robinsinghdevgan.pageobjects.PageObjects;
+import com.robinsinghdevgan.setup.InitialSetup;
+import com.robinsinghdevgan.setup.SpreadsheetReader;
 
 public class NewTest {
 
@@ -32,11 +30,10 @@ public class NewTest {
 
 	@DataProvider
 	public Iterator<Object[]> getTestData() {
-		Xls_Reader reader = null;
+		SpreadsheetReader reader = null;
 		ArrayList<Object[]> testData = new ArrayList<Object[]>();
 
-		reader = new Xls_Reader(
-				"C:\\Users\\robin\\git\\SeleniumJava\\seleniumPoC\\src\\test\\java\\com\\robinsinghdev\\app\\data.xlsx");
+		reader = new SpreadsheetReader(InitialSetup.dataSheetLocation);
 
 		// for (int rowNum = 2; rowNum <= reader.getRowCount("search"); rowNum++) {
 		for (int rowNum = 2; rowNum <= 2; rowNum++) {
@@ -51,7 +48,7 @@ public class NewTest {
 
 	@BeforeTest
 	public void setup() throws IOException {
-		driver = BrowserSetup.setup();
+		driver = InitialSetup.setup();
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
@@ -63,7 +60,7 @@ public class NewTest {
 		po.weCrossButtonWelcomeForm.click();
 	}
 
-	@Test(dataProvider = "getTestData")
+	@Test(dataProvider = "getTestData", enabled = true)
 	public void f(String searchValues, String sortBy, String Brand)
 			throws NoSuchElementException, InterruptedException, AWTException {
 
@@ -80,12 +77,12 @@ public class NewTest {
 		// Thread.sleep(1000);
 
 		// Click on middle element of 'to' price range
-		/*po.wePriceSectionMaxDropDown.click();
-		Thread.sleep(400);
-		List<WebElement> options = po.wePriceSectionMaxDropDownOptions;
-		int selectThisOption = options.size() - 3;
-		options.get(selectThisOption).click();*/
-		
+		/*
+		 * po.wePriceSectionMaxDropDown.click(); Thread.sleep(400); List<WebElement>
+		 * options = po.wePriceSectionMaxDropDownOptions; int selectThisOption =
+		 * options.size() - 3; options.get(selectThisOption).click();
+		 */
+
 		// Sort Price
 		new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(po.weSortH2L));
 		switch (sortBy) {
@@ -108,12 +105,12 @@ public class NewTest {
 			System.out.println("err");
 			break;
 		}
-		//new WebDriverWait(driver, 3);
+		// new WebDriverWait(driver, 3);
 		// Select Brand
 
 		new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(po.weBrandSection));
 		po.weBrandSection.getLocation();
-		actions.moveToElement(po.weBrandSection).build().perform();
+		//actions.moveToElement(po.weBrandSection).build().perform();
 		/*
 		 * // driver.findElement(By.xpath(xBrand)).click();
 		 * 
@@ -123,7 +120,7 @@ public class NewTest {
 		driver.findElement(By.xpath("(//*[contains(text(),'% off')])[1]")).click();
 
 	}
-	
+
 	@AfterTest
 	public void close() {
 		driver.quit();
