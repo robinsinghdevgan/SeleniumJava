@@ -12,11 +12,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Condition.*;
+import com.codeborne.selenide.WebDriverRunner;
 
 var exe = "C:\\Users\\robin\\Downloads\\chromedriver_win32\\chromedriver.exe"
 System.setProperty("webdriver.chrome.driver", exe);
 
 var driver = new ChromeDriver();
+WebDriverRunner.setWebDriver(driver);
 
-WebElement x(String XP){return driver.findElement(By.xpath(XP));}
-driver.get("https://flipkart.com/");
+WebElement xc(String XP){return driver.findElement(By.xpath(XP));}
+open("https://flipkart.com/");
+

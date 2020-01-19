@@ -8,14 +8,14 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 
-public final class PageObjects {
+public final class PageObjectsFlipkart {
 	
 	WebDriver driver = null;
-	public PageObjects(WebDriver driver) {
+	public PageObjectsFlipkart(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
-	
+		
 	@FindBy(css = "button[class='_2AkmmA _29YdH8']")
 	public WebElement weCrossButtonWelcomeForm;
 	

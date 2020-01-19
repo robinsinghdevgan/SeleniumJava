@@ -18,15 +18,15 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.robinsinghdevgan.pageobjects.PageObjects;
+import com.robinsinghdevgan.pageobjects.PageObjectsFlipkart;
 import com.robinsinghdevgan.setup.ArtifactLocations;
 import com.robinsinghdevgan.setup.InitialSetup;
 import com.robinsinghdevgan.setup.SpreadsheetReader;
 
-public class NewTest {
+public class FlipkartTest {
 
 	private WebDriver driver = null;
-	private PageObjects po = null;
+	private PageObjectsFlipkart po = null;
 	Actions actions = null;
 
 	@DataProvider
@@ -55,7 +55,7 @@ public class NewTest {
 		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 
-		po = new PageObjects(driver);
+		po = new PageObjectsFlipkart(driver);
 		driver.get("https://flipkart.com/");
 		actions = new Actions(driver);
 		po.weCrossButtonWelcomeForm.click();

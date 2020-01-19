@@ -1,6 +1,5 @@
 package com.robinsinghdevgan.setup;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,7 +18,7 @@ public final class InitialSetup {
 			Properties prop = new Properties();
 			prop.load(fis);
 			fis.close();
-			prop.forEach((key, value) -> System.out.println("Key : " + key + ", Value : " + value));
+			//prop.forEach((key, value) -> System.out.println("Key : " + key + ", Value : " + value));
 			if (prop.getProperty("browser").equals("chrome")) {
 				System.setProperty("webdriver.chrome.driver", ArtifactLocations.getChromeDriverPath());
 				driver = new ChromeDriver();
