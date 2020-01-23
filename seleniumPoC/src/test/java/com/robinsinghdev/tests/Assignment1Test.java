@@ -1,4 +1,4 @@
-package com.robinsinghdev.app;
+package com.robinsinghdev.tests;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -10,15 +10,16 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
-
-import com.robinsinghdevgan.setup.InitialSetup;
 
 public class Assignment1Test {
 	@Test
 	public void f() throws IOException {
 		
-		WebDriver driver = InitialSetup.setup();
+		String exePath = "C:\\Users\\robin\\Downloads\\chromedriver_win32\\chromedriver.exe";
+		System.setProperty("webdriver.chrome.driver", exePath);
+		WebDriver driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
 		

@@ -1,4 +1,4 @@
-package com.robinsinghdev.app;
+package com.robinsinghdev.tests;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;

@@ -1,4 +1,4 @@
-package com.robinsinghdevgan.FlipkartPageObjects;
+package com.robinsinghdevgan.pageobjects.flipkart;
 
 import org.openqa.selenium.By;
 

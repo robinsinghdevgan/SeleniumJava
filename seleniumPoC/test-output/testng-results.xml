@@ -2,37 +2,45 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2020-01-19T18:49:30 IST" name="Default suite" finished-at="2020-01-19T18:50:14 IST" duration-ms="44253">
+  <suite started-at="2020-01-23T22:20:44 IST" name="Default suite" finished-at="2020-01-23T22:21:27 IST" duration-ms="43105">
     <groups>
     </groups>
-    <test started-at="2020-01-19T18:49:30 IST" name="Default test" finished-at="2020-01-19T18:50:14 IST" duration-ms="44253">
-      <class name="com.robinsinghdevgan.FlipkartTests.SearchAddtoCartTest">
-        <test-method is-config="true" signature="setup()[pri:0, instance:com.robinsinghdevgan.FlipkartTests.SearchAddtoCartTest@3c22fc4c]" started-at="2020-01-19T18:49:30 IST" name="setup" finished-at="2020-01-19T18:50:02 IST" duration-ms="31967" status="PASS">
+    <test started-at="2020-01-23T22:20:44 IST" name="Default test" finished-at="2020-01-23T22:21:27 IST" duration-ms="43105">
+      <class name="com.robinsinghdevgan.tests.flipkart.SearchAddtoCartTest">
+        <test-method is-config="true" signature="getProperties()[pri:0, instance:com.robinsinghdevgan.tests.flipkart.SearchAddtoCartTest@47d90b9e]" started-at="2020-01-23T22:20:44 IST" name="getProperties" finished-at="2020-01-23T22:20:44 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getProperties -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.robinsinghdevgan.tests.flipkart.SearchAddtoCartTest@47d90b9e]" started-at="2020-01-23T22:20:44 IST" name="setup" finished-at="2020-01-23T22:21:14 IST" duration-ms="30401" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="f(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.robinsinghdevgan.FlipkartTests.SearchAddtoCartTest@3c22fc4c]" started-at="2020-01-19T18:50:03 IST" name="f" data-provider="getTestData" finished-at="2020-01-19T18:50:14 IST" duration-ms="11420" status="PASS">
+        <test-method signature="f(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.robinsinghdevgan.tests.flipkart.SearchAddtoCartTest@47d90b9e]" started-at="2020-01-23T22:21:15 IST" name="f" data-provider="getTestData" finished-at="2020-01-23T22:21:27 IST" duration-ms="11375" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[Smartphone]]>
+                <![CDATA[TV]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[NEW]]>
+                <![CDATA[REL]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[Realme]]>
+                <![CDATA[Samsung]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- f -->
-      </class> <!-- com.robinsinghdevgan.FlipkartTests.SearchAddtoCartTest -->
+        <test-method is-config="true" signature="checkCart()[pri:0, instance:com.robinsinghdevgan.tests.flipkart.SearchAddtoCartTest@47d90b9e]" started-at="2020-01-23T22:21:27 IST" name="checkCart" finished-at="2020-01-23T22:21:27 IST" duration-ms="462" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- checkCart -->
+      </class> <!-- com.robinsinghdevgan.tests.flipkart.SearchAddtoCartTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

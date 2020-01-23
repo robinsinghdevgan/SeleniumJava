@@ -1,37 +1,60 @@
-package com.robinsinghdevgan.FlipkartTests;
+package com.robinsinghdevgan.tests.flipkart;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.switchTo;
 
 import java.awt.AWTException;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.codeborne.selenide.WebDriverRunner;
-import com.robinsinghdevgan.FlipkartPageObjects.LandingPage;
-import com.robinsinghdevgan.FlipkartPageObjects.ProductPage;
-import com.robinsinghdevgan.FlipkartPageObjects.SearchPage;
+import com.robinsinghdevgan.pageobjects.flipkart.LandingPage;
+import com.robinsinghdevgan.pageobjects.flipkart.ProductPage;
+import com.robinsinghdevgan.pageobjects.flipkart.SearchPage;
 import com.robinsinghdevgan.setup.ArtifactLocations;
-import com.robinsinghdevgan.setup.InitialSetup;
+import com.robinsinghdevgan.setup.SelectWebBrowser;
 import com.robinsinghdevgan.setup.SpreadsheetReader;
 
-import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Condition.*;
-
 public class SearchAddtoCartTest {
+	
+	private Properties prop = null;
+	private String propertiesFilePath = "flipkart.properties";
+	private LandingPage lp = null;
+	private WebDriver driver = null;
+	private String defaultWindowHandle = "";
+	
+	@BeforeTest
+	private void getProperties() {
+		try (InputStream fis = new FileInputStream(ArtifactLocations.getPropertyFilePath(propertiesFilePath))) {
+			prop = new Properties();
+			prop.load(fis);
+			fis.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@DataProvider
 	public Iterator<Object[]> getTestData() {
-		SpreadsheetReader reader = null;
 		ArrayList<Object[]> testData = new ArrayList<Object[]>();
 
-		reader = new SpreadsheetReader(ArtifactLocations.getSpreadsheetFilePath("data.xlsx"));
-
+		SpreadsheetReader reader = new SpreadsheetReader(ArtifactLocations.getSpreadsheetFilePath(prop.getProperty("Data_Sheet")));
+		
 		// for (int rowNum = 2; rowNum <= reader.getRowCount("search"); rowNum++) {
 		for (int rowNum = 2; rowNum <= 2; rowNum++) {
 			String searchValue = reader.getCellData("search", "Search Item Value", rowNum);
@@ -42,13 +65,12 @@ public class SearchAddtoCartTest {
 		}
 		return testData.iterator();
 	}
+
 	
-	LandingPage lp = null;
-	WebDriver driver = null;
-	
+
 	@BeforeTest
 	public void setup() throws IOException {
-		driver = InitialSetup.setup();
+		driver = SelectWebBrowser.setup(prop);
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
@@ -57,6 +79,7 @@ public class SearchAddtoCartTest {
 		WebDriverRunner.setWebDriver(driver);
 		open("https://flipkart.com/");
 		lp = new LandingPage();
+		defaultWindowHandle = driver.getWindowHandle();
 	}
 
 	@Test(dataProvider = "getTestData", enabled = true)
@@ -67,18 +90,27 @@ public class SearchAddtoCartTest {
 		System.out.println(searchValues);
 		System.out.println(sortBy);
 		System.out.println(brand);
-		
+
+		Thread.sleep(2000);
 		SearchPage sp = lp.search(searchValues);
 		sp.searchBrand(brand);
 		sp.selectSortType(sortBy);
-		
-		
+
 		ProductPage pp = sp.clickOnFirstRes();
 		switchTo().window(1);
-		System.out.println(driver.getWindowHandle());
+		// use window handle to switch back to default and close tab
+		Thread.sleep(2000);
 		pp.enterPINCode("110085");
 		pp.addtoCart();
-		pp.backToSearchResPage();
+		pp.backToSearchResPage(defaultWindowHandle);
+		Thread.sleep(1000);
+		// cart value
+		// $(By.xpath("(//span[contains(text(),'Sort')]/parent::*)//div[contains(text(),
+		// 'Popular')]"));
 	}
 
+	@AfterTest
+	public void checkCart() {
+		$(By.xpath("//span[contains(text(),'Cart')]")).click();
+	}
 }
