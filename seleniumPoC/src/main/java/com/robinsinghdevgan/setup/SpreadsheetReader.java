@@ -5,14 +5,27 @@ package com.robinsinghdevgan.setup;
  * Created Date: Dec 25th, 2019
  * mail me at naveenanimation20@gmail.com in case of any PR or query
  * Licensed under NaveenAutomation Labs
+ * @author RobinSinghDevgan
+ * Last Modified Date: 01 Feb 2020
+ * Robin: Changed HSSFDateUtil to .apache.poi.ss.usermodel.DateUtil
  */
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Random;
 
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 //import org.apache.poi.xssf.usermodel.XSSFCreationHelper;
@@ -21,9 +34,9 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class SpreadsheetReader {
-	public String path;
-	public FileInputStream fis = null;
-	public FileOutputStream fileOut = null;
+	private String path = null;
+	private FileInputStream fis = null;
+	private FileOutputStream fileOut = null;
 	private XSSFWorkbook workbook = null;
 	private XSSFSheet sheet = null;
 	private XSSFRow row = null;
@@ -55,7 +68,66 @@ public class SpreadsheetReader {
 		}
 
 	}
+	
+	//added Robin Singh Devgan
+	public String getRandomCellFromColumn(String sheetName, String colNam, int rowCount, int rowStart) {
+		Random random = new Random();
+		int randomNumber = random.nextInt((rowCount - rowStart) + 1) + rowStart;
+		String temp = getCellData(sheetName, colNam, randomNumber);
+		// System.out.println(randomNumber +','+ temp);
+		return temp;
+	}
+	
+	//rOBIN
+	public Map<String, Integer> getHeaderNameAndDataCount(int dataStartsAfterRow){
+		try {
+	        InputStream is = new FileInputStream("C:\\Users\\robin\\git\\SeleniumJava\\seleniumPoC\\Data Sheet\\test.xlsx");
+	        Workbook wb = WorkbookFactory.create(is);
+	        Sheet sheet = wb.getSheetAt(0);
+	        Iterator<Row> rowIter = sheet.rowIterator();
+	        Row r = sheet.rowIterator().next();
+	        int lastCellNum = r.getLastCellNum();
+	        String[] headers = new String[lastCellNum];
+	        Map<String, Integer> colNameAndCount = new LinkedHashMap<String, Integer>();
+	        
+	        for (int i = 0; i < lastCellNum; ++i)
+	        {
+	        	headers[i] = r.getCell(i).getStringCellValue();
+	        }
+	        	
+	        
+	        int col = 0;
+	        rowIter = sheet.rowIterator();
+	        while(rowIter.hasNext()) {
+	        	r = rowIter.next();
+	            Iterator<Cell> cellIter = r.cellIterator();
+	            while(cellIter.hasNext()) {
+	                Cell cell = cellIter.next();
+	                boolean isBlankCell = CellType.BLANK == cell.getCellType();
+	                boolean isEmptyStringCell = CellType.STRING == cell.getCellType() && cell.getStringCellValue().trim().isEmpty(); 
 
+	                if (isBlankCell || isEmptyStringCell) {
+	                	continue;
+	                }
+	                col = cell.getColumnIndex();
+	                colNameAndCount.merge(headers[col], 1, Integer::sum);
+	                //cell.
+	                /*DataFormatter df = new DataFormattesr();
+	                data = df.formatCellValue(cell);
+	                System.out.println("Data: " + data);*/
+	            }
+	        }
+	        is.close();
+	        colNameAndCount.forEach((k, v) -> colNameAndCount.merge(k, -dataStartsAfterRow, Integer::sum));
+	        
+	        return colNameAndCount;
+	    }
+	    catch(Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
+	
 	/**
 	 * Code has been updated as per new POI version - 4.x.x
 	 * 
@@ -66,15 +138,16 @@ public class SpreadsheetReader {
 	 * @return
 	 */
 	// returns the data from a cell
-	public String getCellData(String sheetName, String colName, int rowNum) {
+	public String getCellData(String sheetName, String colName, int rowNum) throws NullPointerException {
 		try {
 			if (rowNum <= 0)
 				return "";
 
 			int index = workbook.getSheetIndex(sheetName);
 			int col_Num = -1;
-			if (index == -1)
-				return "";
+			if (index == -1) {
+				throw new NullPointerException();
+			}
 
 			sheet = workbook.getSheetAt(index);
 			row = sheet.getRow(0);
@@ -95,7 +168,7 @@ public class SpreadsheetReader {
 			if (cell == null)
 				return "";
 
-			//System.out.println(cell.getCellType().name());
+			// System.out.println(cell.getCellType().name());
 			//
 			if (cell.getCellType().name().equals("STRING"))
 				return cell.getStringCellValue();
@@ -107,12 +180,12 @@ public class SpreadsheetReader {
 			else if ((cell.getCellType().name().equals("NUMERIC")) || (cell.getCellType().name().equals("FORMULA"))) {
 
 				String cellText = String.valueOf(cell.getNumericCellValue());
-				if (HSSFDateUtil.isCellDateFormatted(cell)) {
+				if (DateUtil.isCellDateFormatted(cell)) {
 					// format in form of M/D/YY
 					double d = cell.getNumericCellValue();
 
 					Calendar cal = Calendar.getInstance();
-					cal.setTime(HSSFDateUtil.getJavaDate(d));
+					cal.setTime(DateUtil.getJavaDate(d));
 					cellText = (String.valueOf(cal.get(Calendar.YEAR))).substring(2);
 					cellText = cal.get(Calendar.DAY_OF_MONTH) + "/" + cal.get(Calendar.MONTH) + 1 + "/" + cellText;
 
@@ -130,7 +203,6 @@ public class SpreadsheetReader {
 			}
 
 		} catch (Exception e) {
-
 			e.printStackTrace();
 			return "row " + rowNum + " or column " + colName + " does not exist in xls";
 		}
@@ -174,12 +246,12 @@ public class SpreadsheetReader {
 			else if ((cell.getCellType().name().equals("NUMERIC")) || (cell.getCellType().name().equals("FORMULA"))) {
 
 				String cellText = String.valueOf(cell.getNumericCellValue());
-				if (HSSFDateUtil.isCellDateFormatted(cell)) {
+				if (DateUtil.isCellDateFormatted(cell)) {
 					// format in form of M/D/YY
 					double d = cell.getNumericCellValue();
 
 					Calendar cal = Calendar.getInstance();
-					cal.setTime(HSSFDateUtil.getJavaDate(d));
+					cal.setTime(DateUtil.getJavaDate(d));
 					cellText = (String.valueOf(cal.get(Calendar.YEAR))).substring(2);
 					cellText = cal.get(Calendar.MONTH) + 1 + "/" + cal.get(Calendar.DAY_OF_MONTH) + "/" + cellText;
 
@@ -205,9 +277,6 @@ public class SpreadsheetReader {
 	// returns true if data is set successfully else false
 	public boolean setCellData(String sheetName, String colName, int rowNum, String data) {
 		try {
-			fis = new FileInputStream(path);
-			workbook = new XSSFWorkbook(fis);
-
 			if (rowNum <= 0)
 				return false;
 
@@ -362,8 +431,6 @@ public class SpreadsheetReader {
 		// System.out.println("**************addColumn*********************");
 
 		try {
-			fis = new FileInputStream(path);
-			workbook = new XSSFWorkbook(fis);
 			int index = workbook.getSheetIndex(sheetName);
 			if (index == -1)
 				return false;
@@ -407,12 +474,10 @@ public class SpreadsheetReader {
 		try {
 			if (!isSheetExist(sheetName))
 				return false;
-			fis = new FileInputStream(path);
-			workbook = new XSSFWorkbook(fis);
 			sheet = workbook.getSheet(sheetName);
 			XSSFCellStyle style = workbook.createCellStyle();
 			// style.setFillForegroundColor(HSSFColor.GREY_40_PERCENT.index);
-			//XSSFCreationHelper createHelper = workbook.getCreationHelper();
+			// XSSFCreationHelper createHelper = workbook.getCreationHelper();
 			// style.setFillPattern(XSSFCellStyle.NO_FILL);
 			for (int i = 0; i < getRowCount(sheetName); i++) {
 				row = sheet.getRow(i);

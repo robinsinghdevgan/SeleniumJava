@@ -89,8 +89,14 @@
 			<groupId>com.codeborne</groupId>
 			<artifactId>selenide</artifactId>
 			<version>5.6.0</version>
-			<!--<scope>test</scope>-->
+			<!--<scope>test</scope> -->
 		</dependency>
-
+		
+		<!-- faker -->
+		<dependency>
+			<groupId>com.github.javafaker</groupId>
+			<artifactId>javafaker</artifactId>
+			<version>1.0.1</version>
+		</dependency>
 	</dependencies>
 </project>

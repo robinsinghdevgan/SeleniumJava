@@ -1,4 +1,4 @@
-package com.robinsinghdevgan.pageobjects.flipkart;
+package com.robinsinghdevgan.flipkart.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
 

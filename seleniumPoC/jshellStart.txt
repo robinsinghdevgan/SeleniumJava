@@ -23,5 +23,7 @@ var driver = new ChromeDriver();
 WebDriverRunner.setWebDriver(driver);
 
 WebElement xc(String XP){return driver.findElement(By.xpath(XP));}
-open("https://flipkart.com/");
+open("https://adactin.com/HotelAppBuild2/index.php");
+
+
 
