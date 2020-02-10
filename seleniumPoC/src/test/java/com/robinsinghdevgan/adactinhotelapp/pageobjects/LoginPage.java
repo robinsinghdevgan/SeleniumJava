@@ -25,6 +25,7 @@ public class LoginPage {
 		this.driver = driver;
 		// This initElements method will create all WebElements
 		PageFactory.initElements(driver, this);
+		driver.get(prop.getProperty("baseURL"));
 	}
 
 	public SearchHotel login() {

@@ -13,6 +13,8 @@ import java.util.Iterator;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -36,10 +38,15 @@ public class SearchAddtoCartTest {
 	private LandingPage lp = null;
 	private WebDriver driver = null;
 	private String defaultWindowHandle = "";
+	protected static Logger log = LogManager.getLogger(SearchAddtoCartTest.class.getName());
+	
 	
 	@BeforeTest
 	private void getProperties() {
-		try (InputStream fis = new FileInputStream(ArtifactLocations.getPropertyFilePath(propertiesFileName))) {
+		log.info("Starting.... flipkart");
+		
+		ArtifactLocations.setPropertyFileName(propertiesFileName);
+		try (InputStream fis = new FileInputStream(ArtifactLocations.getPropertyFilePath())) {
 			prop = new Properties();
 			prop.load(fis);
 			fis.close();
@@ -53,7 +60,7 @@ public class SearchAddtoCartTest {
 	public Iterator<Object[]> getTestData() {
 		ArrayList<Object[]> testData = new ArrayList<Object[]>();
 
-		SpreadsheetReader reader = new SpreadsheetReader(ArtifactLocations.getSpreadsheetFilePath(prop.getProperty("Data_Sheet")));
+		SpreadsheetReader reader = new SpreadsheetReader(ArtifactLocations.getWorkBookFilePath(prop.getProperty("Data_Sheet")));
 		
 		// for (int rowNum = 2; rowNum <= reader.getRowCount("search"); rowNum++) {
 		for (int rowNum = 2; rowNum <= 2; rowNum++) {

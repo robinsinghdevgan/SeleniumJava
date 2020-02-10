@@ -1,74 +1,41 @@
-package com.robinsinghdevgan.adactinhotelapp.tests;
+package com.robinsinghdevgan.adactinhotelapp;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Locale;
-import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import com.github.javafaker.Faker;
-import com.robinsinghdevgan.setup.ArtifactLocations;
+import com.robinsinghdevgan.setup.BaseTestSetup;
 import com.robinsinghdevgan.setup.SelectWebBrowser;
 
-public class SetupTest {
-
-	protected static Properties prop = null;
-	private String propertiesFileName = "adactinHotelApp.properties";
-	protected static WebDriver driver = null;
-	
+public class TestSetup extends BaseTestSetup{
 	@BeforeSuite
-	public void beforeSuite() {
-		setProperties();
-		createDriver();
+	public void beforeSuite() throws IOException {
+		setProperties("adactinHotelApp.properties");
+		/*
+		setDriver(SelectWebBrowser.setup(getPropertiesObject()));
+		
+		getDriver().manage().deleteAllCookies();
+		getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		getDriver().manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+		getDriver().manage().window().maximize();*/
 	}
 
 	@AfterSuite
-	public void afterSuite() {
-		//driver.quit();
+	public void afterSuite() throws IOException {
+		getDriver().quit();
+		setDriver(null);
 	}
-
-	private void setProperties() {
-		try (InputStream fis = new FileInputStream(ArtifactLocations.getPropertyFilePath(propertiesFileName))) {
-			prop = new Properties();
-			prop.load(fis);
-			fis.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static Properties getPropertiesObject() {
-		return prop;
-	}
-
-	public void createDriver() {
-		try {
-			driver = SelectWebBrowser.setup(prop);
-		} catch (IOException e) {
-			// TODO: User Log4j
-			e.printStackTrace();
-		}
-		driver.manage().deleteAllCookies();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
-	}
-
-	public static WebDriver getDriver() {
-		return driver;
-	}
+	
 
 	public static Iterator<Object[]> createData() {
 		ArrayList<String> data = createSearchPageTextFieldsData();
@@ -102,4 +69,5 @@ public class SetupTest {
 	}
 
 
+	
 }

@@ -1,0 +1,6 @@
+22:51:49.277 [main] TRACE com.robinsinghdevgan.adactinhotelapp.E2ETest - Starting test
+22:51:49.281 [main] INFO  com.robinsinghdevgan.adactinhotelapp.E2ETest - Starting test
+22:51:49.282 [main] DEBUG com.robinsinghdevgan.adactinhotelapp.E2ETest - Starting test
+22:51:49.282 [main] WARN  com.robinsinghdevgan.adactinhotelapp.E2ETest - Starting test
+22:51:49.282 [main] ERROR com.robinsinghdevgan.adactinhotelapp.E2ETest - Starting test
+22:51:49.689 [main] INFO  com.robinsinghdevgan.adactinhotelapp.E2ETest - Starting test

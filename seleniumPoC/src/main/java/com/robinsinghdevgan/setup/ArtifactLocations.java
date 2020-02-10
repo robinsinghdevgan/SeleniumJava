@@ -9,15 +9,24 @@ public class ArtifactLocations {
 	private final static String propertiesFileDir = projectRootDir + dirSeparator + "Properties File";
 	private final static String webDriverDir = projectRootDir + dirSeparator + "WebDriver";
 	private final static String dataSheetFileDir = projectRootDir + dirSeparator + "Data Sheet";
-
-	public static String getPropertyFilePath(final String fileNameWithExtension) {
-		String filePath = propertiesFileDir + dirSeparator + fileNameWithExtension;
-		return filePath;
+	
+	private static String propertiesFilePath = null;
+	private static String workBookFilePath = null;
+	
+	public static void setPropertyFileName(final String fileNameWithExtension) {
+		propertiesFilePath = propertiesFileDir + dirSeparator + fileNameWithExtension;		
 	}
 
-	public static String getSpreadsheetFilePath(final String fileNameWithExtension) {
-		String filePath = dataSheetFileDir + dirSeparator + fileNameWithExtension;
-		return filePath;
+	public static void setWorkBookFileName(final String fileNameWithExtension) {
+		workBookFilePath = dataSheetFileDir + dirSeparator + fileNameWithExtension;
+	}
+	
+	public static String getPropertyFilePath() {
+		return propertiesFilePath;
+	}
+
+	public static String getWorkBookFilePath(final String fileNameWithExtension) {
+		return workBookFilePath;
 	}
 
 	public static String getGeckoDriverPath() {
