@@ -3,7 +3,7 @@
 <suite name="Adactin Hotel App Automation Practice">
 	<test thread-count="5" name="Test">
 		<classes>
-			<class name="com.robinsinghdevgan.adactinhotelapp.E2ETest" />
+			<class name="com.robinsinghdevgan.tests.adactinhotelapp.E2ETest" />
 			<!--<class name="com.robinsinghdevgan.flipkart.tests.SearchAddtoCartTest" />  -->
 			
 		</classes>

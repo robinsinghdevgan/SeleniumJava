@@ -3,12 +3,17 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.robinsinghdevgan.adactinhotelapp.tests.TC101_Test">
+      <class name="com.robinsinghdevgan.tests.adactinhotelapp.E2ETest">
         <methods>
+          <include name="b"/>
           <include name="beforeTest"/>
-          <include name="f"/>
+          <include name="beforeSuite"/>
+          <include name="d"/>
+          <include name="a"/>
+          <include name="afterSuite"/>
+          <include name="c"/>
         </methods>
-      </class> <!-- com.robinsinghdevgan.adactinhotelapp.tests.TC101_Test -->
+      </class> <!-- com.robinsinghdevgan.tests.adactinhotelapp.E2ETest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

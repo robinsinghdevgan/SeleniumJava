@@ -1,4 +1,4 @@
-package com.robinsinghdevgan.flipkart.tests;
+package com.robinsinghdevgan.tests.flipkart;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -24,9 +24,9 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.codeborne.selenide.WebDriverRunner;
-import com.robinsinghdevgan.flipkart.pageobjects.LandingPage;
-import com.robinsinghdevgan.flipkart.pageobjects.ProductPage;
-import com.robinsinghdevgan.flipkart.pageobjects.SearchPage;
+import com.robinsinghdevgan.pageobjects.flipkart.LandingPage;
+import com.robinsinghdevgan.pageobjects.flipkart.ProductPage;
+import com.robinsinghdevgan.pageobjects.flipkart.SearchPage;
 import com.robinsinghdevgan.setup.ArtifactLocations;
 import com.robinsinghdevgan.setup.SelectWebBrowser;
 import com.robinsinghdevgan.setup.SpreadsheetReader;

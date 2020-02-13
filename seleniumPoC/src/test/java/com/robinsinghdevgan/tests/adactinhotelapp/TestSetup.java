@@ -1,4 +1,4 @@
-package com.robinsinghdevgan.adactinhotelapp;
+package com.robinsinghdevgan.tests.adactinhotelapp;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -21,13 +21,13 @@ public class TestSetup extends BaseTestSetup{
 	@BeforeSuite
 	public void beforeSuite() throws IOException {
 		setProperties("adactinHotelApp.properties");
-		/*
+		
 		setDriver(SelectWebBrowser.setup(getPropertiesObject()));
 		
 		getDriver().manage().deleteAllCookies();
 		getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		getDriver().manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
-		getDriver().manage().window().maximize();*/
+		getDriver().manage().window().maximize();
 	}
 
 	@AfterSuite
@@ -37,7 +37,7 @@ public class TestSetup extends BaseTestSetup{
 	}
 	
 
-	public static Iterator<Object[]> createData() {
+	protected static Iterator<Object[]> createData() {
 		ArrayList<String> data = createSearchPageTextFieldsData();
 		data.addAll(createBookingPageTextFieldData());
 		Object[] o = data.toArray(new String[data.size()]);

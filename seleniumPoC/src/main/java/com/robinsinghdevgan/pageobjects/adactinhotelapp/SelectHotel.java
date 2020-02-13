@@ -1,4 +1,4 @@
-package com.robinsinghdevgan.adactinhotelapp.pageobjects;
+package com.robinsinghdevgan.pageobjects.adactinhotelapp;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
