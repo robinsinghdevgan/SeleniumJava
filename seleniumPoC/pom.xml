@@ -10,7 +10,7 @@
 	<url>http://maven.apache.org</url>
 	<profiles>
 		<profile>
-			<id>Regression</id>
+			<!--<id>Regression</id>-->
 
 			<build>
 				<pluginManagement>

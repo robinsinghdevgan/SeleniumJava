@@ -33,28 +33,11 @@ public class E2ETest extends TestSetup{
 		/**/
 	}
 	
-	/*
-	@Test
-	public void a() {ExtentTestManager.startTest("a","abcd");
-	logInfo("Starting test");}
-	@Test
-	public void b() {ExtentTestManager.startTest("b","abcd");
-	logInfo("Starting test");}
-	@Test
-	public void c() {ExtentTestManager.startTest("c","abcd");
-	logInfo("Starting test");}
-	@Test
-	public void d() {ExtentTestManager.startTest("d","abcd");
-	logInfo("Starting test");}
-	*/
-	
-	
-	
 	@Test(dataProvider = "createRandomData", enabled = true)
 	public void searchAndBookHotel(String checkInDate, String checkOutDate, String firstName, String lastName, String address,
 			String ccnum, String cvv, String cardExpiryYear) throws InterruptedException {
 		
-		ExtentTestManager.startTest("1234","abcd");
+		ExtentTestManager.startTest("searchAndBookHotel","Search, Select and Pay to book a hotel");
 		
 		logInfo("Starting test");
 	
