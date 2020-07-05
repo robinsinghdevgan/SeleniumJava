@@ -47,7 +47,15 @@ public class SearchPage {
 		SelenideElement brandSearchBar = $(By.xpath("(//div[contains(text(),'Brand')]/parent::*/parent::*)//input[@placeholder='Search Brand']"));
 		if (brandSearchBar.exists())
 			brandSearchBar.val(brand);
-		String firstCheckBox = "//div[contains(text(),'Brand')]/parent::*/following-sibling::*//div[contains(text(),'" + brand + "')]";
+		String[] allPossibleLetterCasesOfBrand = new String[]{String.valueOf(brand.charAt(0)).toUpperCase() + brand.substring(1).toLowerCase(), //First char upperCase, rest lowercase
+				brand.toLowerCase(),
+				brand.toUpperCase()};
+		String firstCheckBox = null;
+		for (String brandName : allPossibleLetterCasesOfBrand) {
+			firstCheckBox = "//div[contains(text(),'Brand')]/parent::*/following-sibling::*//div[contains(text(),'" + brandName + "')]";
+			if ($(By.xpath(firstCheckBox)).exists())
+				break;
+		}
 		$(By.xpath(firstCheckBox)).shouldBe(visible);
 		$(By.xpath(firstCheckBox)).click();	
 		//close by clicking cross button

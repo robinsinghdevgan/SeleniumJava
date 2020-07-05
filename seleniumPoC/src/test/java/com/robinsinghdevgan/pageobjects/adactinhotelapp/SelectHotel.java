@@ -17,7 +17,7 @@ public class SelectHotel {
 	@FindBy(xpath = "//input[@type='radio']")
 	private WebElement firstRadioButton;
 
-	private WebDriver driver = null;
+	private WebDriver driver;
 	
 	public SelectHotel(WebDriver driver) {
 		this.driver  = driver;

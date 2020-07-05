@@ -41,7 +41,7 @@ public class BookHotel {
 	@FindBy(css = "#cancel")
 	private WebElement cancel;
 
-	private WebDriver driver = null;
+	private WebDriver driver;
 
 	public BookHotel(WebDriver driver) {
 		this.driver = driver;

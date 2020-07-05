@@ -17,8 +17,8 @@ public class LoginPage {
 	@FindBy(css = "#login")
 	private WebElement login;
 
-	private Properties prop = null;
-	private WebDriver driver = null;
+	private Properties prop;
+	private WebDriver driver;
 
 	public LoginPage(WebDriver driver, Properties prop) {
 		this.prop = prop;

@@ -9,7 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public final class SelectWebBrowser {
 
-	public static WebDriver setup(Properties prop) throws IOException {
+	public static WebDriver setup(Properties prop) {
 		WebDriver driver = null;
 		// prop.forEach((key, value) -> System.out.println("Key : " + key + ", Value : "
 		// + value));

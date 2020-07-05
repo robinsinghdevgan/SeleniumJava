@@ -9,7 +9,7 @@ import com.robinsinghdevgan.helper.HelperMethods;
 
 public class SearchHotel {
 
-	private WebDriver driver = null;
+	private WebDriver driver;
 	
 	//Drop-down menus
 	@FindBy(css = "#location")
@@ -59,7 +59,7 @@ public class SearchHotel {
 		PageFactory.initElements(driver, this);
 	}
 
-	public void fillData(String checkInDate, String checkOutDate) throws InterruptedException {
+	public void fillData(String checkInDate, String checkOutDate) {
 		// select location
 		HelperMethods.selectRandomOption(locations);
 		// select hotel

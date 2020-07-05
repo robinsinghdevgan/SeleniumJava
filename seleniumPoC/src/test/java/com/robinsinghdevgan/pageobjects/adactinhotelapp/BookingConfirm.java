@@ -11,7 +11,7 @@ public class BookingConfirm {
 	@FindBy(css = "#my_itinerary")
 	private WebElement viewItinerary;
 
-	private WebDriver driver = null;
+	private WebDriver driver;
 
 	public BookingConfirm(WebDriver driver) {
 		this.driver = driver;

@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BookedItinerary {
 
-	private WebDriver driver = null;
+	private WebDriver driver;
 
 	// links
 	@FindBy(xpath = "//a[contains(text(),'Logout')]")
@@ -42,7 +42,7 @@ public class BookedItinerary {
 
 		WebDriverWait wait = new WebDriverWait(driver, 5);
 		wait.until(ExpectedConditions.visibilityOfAllElements(tableHeaders));
-		Map<String, String> m = new LinkedHashMap<String, String>();
+		Map<String, String> m = new LinkedHashMap<>();
 		// List<WebElement> allBookingTableRows =
 		// driver.findElements(By.xpath("//tr//tr[2]//td[1]//table[1]//tr"));
 		int latestBookingRowNumber = allBookingTableRows.size();
@@ -53,9 +53,7 @@ public class BookedItinerary {
 			m.putIfAbsent(tableHeaders.get(i).getText(), latestBookingRowCells.get(i).getAttribute("value"));
 		}
 
-		m.entrySet().forEach(entry -> {
-			System.out.println(entry.getKey() + ":" + entry.getValue());
-		});
+		m.forEach((key, value) -> System.out.println(key + ":" + value));
 		/*
 		 * System.out.print(tdata.getText() + "	"); } for (WebElement tdata:
 		 * tableRow2Cells) { System.out.print(tdata.getAttribute("value") + "	"); }
