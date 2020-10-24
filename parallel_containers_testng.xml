@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Docker" parallel="tests">
+    <test name="chrome" parallel="methods" thread-count="5">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="username" value="u1"></parameter>
+        <parameter name="password" value="p1"></parameter>
+        <classes>
+            <class name="com.robinsinghdevgan.tests.adactinhotelapp.ParallelTest"/>
+        </classes>
+    </test>
+    <test name="firefox" parallel="methods" thread-count="5">
+        <parameter name="browser" value="firefox"/>
+        <parameter name="username" value="u2"></parameter>
+        <parameter name="password" value="p2"></parameter>
+        <classes>
+            <class name="com.robinsinghdevgan.tests.adactinhotelapp.ParallelTest"/>
+        </classes>
+    </test>
+    <test name="opera" parallel="methods" thread-count="5">
+        <parameter name="browser" value="opera"/>
+        <parameter name="username" value="u3"></parameter>
+        <parameter name="password" value="p3"></parameter>
+        <classes>
+            <class name="com.robinsinghdevgan.tests.adactinhotelapp.ParallelTest"/>
+        </classes>
+    </test>
+</suite>

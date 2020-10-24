@@ -4,6 +4,7 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -18,20 +19,21 @@ public class LoginPage {
 	private WebElement login;
 
 	private Properties prop;
-	private WebDriver driver;
+	private RemoteWebDriver driver;
 
-	public LoginPage(WebDriver driver, Properties prop) {
+	public LoginPage(RemoteWebDriver driver, Properties prop) {
 		this.prop = prop;
 		this.driver = driver;
 		// This initElements method will create all WebElements
 		PageFactory.initElements(driver, this);
-		driver.get(prop.getProperty("baseURL"));
+		String url = prop.getProperty("baseURL");
+		driver.get(url);
 	}
 
-	public SearchHotel login() {
+	public SearchHotel login(String unamePropertyString, String pwdPropertyString) {
 		// new WebDriverWait(driver, timeOutInSeconds, sleepInMillis)
-		username.sendKeys(prop.getProperty("username"));
-		password.sendKeys(prop.getProperty("password"));
+		username.sendKeys(prop.getProperty(unamePropertyString));
+		password.sendKeys(prop.getProperty(pwdPropertyString));
 		login.click();
 		return new SearchHotel(driver);
 	}

@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.robinsinghdevgan.pageobjects.flipkart.ProductPage;
 import com.robinsinghdevgan.pageobjects.flipkart.SearchPage;
+import com.robinsinghdevgan.setup.BaseTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -28,7 +29,7 @@ import com.robinsinghdevgan.setup.SpreadsheetReader;
 
 import static com.codeborne.selenide.Selenide.*;
 
-public class SearchAddtoCartTest {
+public class SearchAddtoCartTest extends BaseTest {
 
     private Properties prop = null;
     private WebDriver driver = null;
@@ -71,12 +72,7 @@ public class SearchAddtoCartTest {
 
     @BeforeTest
     public void setup() {
-        driver = SelectWebBrowser.setup(prop);
-        driver.manage().deleteAllCookies();
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        WebDriverRunner.setWebDriver(driver);
+        WebDriverRunner.setWebDriver(getDriver());
     }
 
     @Test(dataProvider = "getTestData")
@@ -111,8 +107,4 @@ public class SearchAddtoCartTest {
 
     }
 
-    @AfterTest
-    public void checkCart() {
-        driver.quit();
-    }
 }

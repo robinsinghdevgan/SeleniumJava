@@ -11,7 +11,7 @@ public class HelperMethods {
 		Select dropDownMenu;
 		dropDownMenu = new Select(comboMenuElement);
 		int max = dropDownMenu.getOptions().size();
-        int min = 1;
+        int min = 4;
 		
 		dropDownMenu.selectByIndex(rand.nextInt((max - min)) + min);
 

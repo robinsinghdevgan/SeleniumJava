@@ -39,7 +39,7 @@ public class E2ETest extends BaseTestSetup{
 		setLogger(MethodHandles.lookup().lookupClass());
 	}
 
-
+/*
 	@Test(dataProvider = "createRandomData")
 	public void searchAndBookHotel(String checkInDate, String checkOutDate, String firstName, String lastName, String address,
 			String ccnum, String cvv, String cardExpiryYear) throws InterruptedException {
@@ -74,7 +74,7 @@ public class E2ETest extends BaseTestSetup{
 		logInfo("Logging out");
 		bookedItinerary.logOut();
 	}
-
+*/
 	@DataProvider
 	private Iterator<Object[]> createRandomData() {
 		return createData();
